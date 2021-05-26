@@ -27,7 +27,12 @@ const account = new Schema({
     email: {
         type: String,
         default: null
-    }
+    },
+    active: {
+        type: Boolean,
+        default: false
+    },
+    role: Number
 })
 
 module.exports = mongoose.model("Account", account)
