@@ -60,8 +60,8 @@ exports.handleLogin = (req, res) => {
     .then(user => {
         if (user) {
             data = user
-            
-            return bcrypt.compare(password, user.password)
+            if (!data.active) throw new Error("please active your account first.") //Check if account active or not
+            else return bcrypt.compare(password, user.password)
         }
     })
     .then(match => { //return TRUE if match otherwise is FALSE
