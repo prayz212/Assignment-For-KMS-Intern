@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken')
 const nodeMailer = require('nodemailer')
 const PRIVATE_KEY = process.env.PRIVATE_KEY
 const SALT_ROUNDS = 12
+const EMAIL = process.env.EMAIL
+const PWD = process.env.PASSWORD
 
 exports.handleRegistration = (req, res) => {
     let {username, password, fullname, id, age, title, email, role} = req.body
@@ -128,13 +130,13 @@ let sendMail = (toEmail, activeCode) => {
     const sender = nodeMailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'nhoxpro1215@gmail.com',
-            pass: 'Chivi234'
+            user: EMAIL,
+            pass: PWD
         }
     })
 
     const mail = {
-        from: "nhoxpro1215@gmail.com",
+        from: EMAIL,
         to: `${toEmail}`,
         subject: "Activate your KMS account",
         text: `This is your active code: ${activeCode}. It will expire after 10 minutes.`
